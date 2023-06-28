@@ -1,4 +1,4 @@
-﻿namespace MyLeetCode.Array;
+﻿namespace MyLeetCode.arrays;
 public class L1909
 {
     public bool CanBeIncreasing(int[] nums)
