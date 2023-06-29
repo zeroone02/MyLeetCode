@@ -1,18 +1,34 @@
 ﻿using MyLeetCode.linkedlist;
 using MyLeetCode.Tree;
-static int[] TwoSum(int[] nums, int target)
+using System.Collections.Generic;
+
+static int[] TopKFrequent(int[] nums, int k)
 {
-   var pairs = new Dictionary<int, int>();
+	var dict = new Dictionary<int, int>();
 	for (int i = 0; i < nums.Length; i++)
 	{
-		if (pairs.ContainsKey(target - nums[i]))
+		if (!dict.ContainsKey(nums[i]))
 		{
-			return new int[] {pairs[target - nums[i]],i};
+			dict.Add(nums[i],1);
 		}
-		pairs.TryAdd(nums[i], i);
+		else
+		{
+			dict[nums[i]]++;
+		}
 	}
-	return default;
+    var ordered = dict.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
+	int[] res = ordered.Select(x => x.Key).Take(k).ToArray();
+    return res;
 }
-//Входные данные: числа = [2,7,11,15], цель = 9 
-int[] n = { 2, 7, 11, 15,1,1,2,3 };
-TwoSum(n, 4);
+
+int[] arr = { 1, 1, 1, 2, 2, 3,4,4,4,4 };
+var a = TopKFrequent(arr,2);
+//1.пройтись по всему массиву 
+//    если в dict нет элемента добавить его в key и затем value++,
+//    если же он есть в dict, то value++ от его key;
+//Ввод: nums = [1, 1, 1, 2, 2, 3], k = 2
+//key:1 value 3
+//key:2 value 2
+//key:3 value 1
+
+//2.Отсортировать словарь и выбрать его первые k элементов
