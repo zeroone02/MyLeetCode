@@ -15,3 +15,4 @@ public class L1
         return default;
     }
 }
+//Входные данные: числа = [-1,0,1,2,-1,-4]
