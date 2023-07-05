@@ -1,8 +1,22 @@
-﻿using MyLeetCode.arrays;
-static IList<IList<int>> ThreeSum(int[] nums)
+﻿static int MaxProfit(int[] prices)
 {
-    return default;
+	List<int> maxPrice = new List<int>();
+	int buy = prices[0];
+	for (int i = 1; i < prices.Length; i++)
+	{
+		if (buy > prices[i])
+		{
+			buy = prices[i];
+		}
+		if (buy < prices[i])
+		{
+			maxPrice.Add(prices[i] - buy);
+		}
+	}
+	if (maxPrice.Count == 0) return 0;
+	return maxPrice.Max();
 }
-int[] s = { -1, 0, 1, 2, -1, -4 };
-L1 l1 = new L1();
-l1.TwoSum(s,0);
+int[] prices = { 1,4,2};
+var c = MaxProfit(prices);
+Console.WriteLine(c);
+//Входные данные: цены = [7,2,5,3,6,1]
