@@ -1,22 +1,15 @@
-﻿static int MaxProfit(int[] prices)
+﻿static bool ContainsNearbyDuplicate(int[] nums, int k)
 {
-	List<int> maxPrice = new List<int>();
-	int buy = prices[0];
-	for (int i = 1; i < prices.Length; i++)
-	{
-		if (buy > prices[i])
-		{
-			buy = prices[i];
-		}
-		if (buy < prices[i])
-		{
-			maxPrice.Add(prices[i] - buy);
-		}
-	}
-	if (maxPrice.Count == 0) return 0;
-	return maxPrice.Max();
+    Dictionary<int, int> map = new Dictionary<int, int>();
+    for (int i = 0; i < nums.Length; i++)
+    {
+        if (map.ContainsKey(nums[i]) && Math.Abs(map[nums[i]] - i) <= k)
+        {
+            return true;
+        }
+        map[nums[i]] = i;
+    }
+    return false;
 }
-int[] prices = { 1,4,2};
-var c = MaxProfit(prices);
-Console.WriteLine(c);
-//Входные данные: цены = [7,2,5,3,6,1]
+int[] nums = { };
+var c = ContainsNearbyDuplicate(nums, 2);
